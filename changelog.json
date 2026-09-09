@@ -1,0 +1,36 @@
+[
+  {
+    "version": "1.2",
+    "build": 3,
+    "date": "2026-09-09",
+    "time": "21:30",
+    "timezone": "IST",
+    "title": "Apps hub, meeting prep, custom instructions, and a much faster sync",
+    "added": [
+      "Apps hub in the menu: Gmail, Google Calendar, Slack, Figma and Notion in one place, with multiple Figma and Notion accounts via pasted tokens.",
+      "Figma and Notion mentions, comments, shares and invites arrive as tasks; tapping one opens the file or page in its app.",
+      "Figma mentions are also read straight from Figma’s comments, so they arrive even when Figma’s notification email is off or delayed.",
+      "Custom instructions per app: free-form text — skip, ignore, prioritise or deprioritise whatever you describe.",
+      "Reply tone: System, or your own voice learned from messages you’ve sent.",
+      "Meeting prep on every meeting: who’s coming, what you discussed with them on Slack, what’s likely to come up, and who to confirm with. A recurring meeting is briefed since you last met.",
+      "A “No action needed” section for updates you might want to read but don’t owe a reply to.",
+      "Notifications for new tasks, and a daily brief at 10:30.",
+      "Swipe right on any task to complete it; haptic feedback throughout the app.",
+      "Settings › Activity Log now shows what each sync read, created and hid.",
+      "New app icon."
+    ],
+    "improved": [
+      "Fetching is noticeably faster: the Slack and Gmail openers run at once instead of queueing, and the AI no longer spends time thinking before structured answers.",
+      "The sync covers the whole day from midnight, and Slack thread replies are included, not just top-level messages.",
+      "Open tasks carry over to today until you finish them; a completed task sits on the day you finished it.",
+      "Tomorrow’s meetings appear on the date strip and are briefed the evening before.",
+      "A meeting that isn’t today, or runs past midnight, shows its day in the time."
+    ],
+    "fixed": [
+      "Tasks skipped by your custom instructions were deleted permanently. They are now hidden instead, the agenda says how many, and changing the instruction brings them back.",
+      "You could get a “new tasks” notification with nothing new on today’s list — tasks from earlier days were filed under the day their message was sent.",
+      "Slack user IDs showing in place of names.",
+      "A rescheduled meeting still showed its old time."
+    ]
+  }
+]
