@@ -10,6 +10,14 @@ The public changelog for the AI Organizer iOS app. A static site: `index.html` r
 - `/2026/<slug>` — one build’s full notes. The slug is derived from the title
   (or set `slug` on the entry to pin it). `vercel.json` rewrites these paths to `index.html`.
 
+## The icon
+
+`favicon.ico` and `icon-*.png` are the app's own icon
+(`AIOrganizer/Resources/Assets.xcassets/AppIcon.appiconset/icon-1024.png`), masked to the iOS
+squircle so the corners are transparent in a browser tab. `apple-touch-icon.png` stays square and
+opaque, because iOS applies its own mask and renders transparency on black. Regenerate all of them
+from the source icon whenever the app's icon changes.
+
 ## Adding an entry
 
 Prepend an object to the array in `changelog.json` (newest first):
