@@ -5,8 +5,8 @@ The public changelog for the AI Organizer iOS app. A static site: `index.html` r
 
 ## Pages
 
-- `/` — the latest year: “What’s new”, the year timeline, and one row per build.
-- `/2026` — a specific year (the year labels on the timeline link here).
+- `/` — the latest year: “What’s new”, a month timeline with a mark on each build’s day, and one row per build.
+- `/2026` — a specific year (year links appear above the timeline once there is more than one year).
 - `/2026/<slug>` — one build’s full notes. The slug is derived from the title
   (or set `slug` on the entry to pin it). `vercel.json` rewrites these paths to `index.html`.
 

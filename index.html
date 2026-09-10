@@ -103,29 +103,35 @@
   }
   .hero p { margin: 0; color: var(--muted); font-size: 17px; text-wrap: balance; }
 
-  /* Year timeline */
+  /* Month timeline */
   .timeline { border-bottom: 1px dashed var(--rule); }
-  .years { display: flex; }
-  .year { flex: 1; min-width: 0; }
-  .year a {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: .02em;
-    color: var(--muted);
-    text-decoration: none;
-    padding: 4px 0 12px;
-    font-variant-numeric: tabular-nums;
+  .years { display: flex; gap: 20px; padding: 0 0 20px; }
+  .years a {
+    font-size: 13px; font-weight: 500; letter-spacing: .02em;
+    color: var(--muted); text-decoration: none; font-variant-numeric: tabular-nums;
   }
-  .year a:hover, .year.active a { color: var(--ink); }
+  .years a:hover, .years a[aria-current] { color: var(--ink); }
+  .months { display: flex; }
+  .month { flex: 1; min-width: 0; }
+  .month .label {
+    display: block;
+    font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); padding: 4px 0 12px; white-space: nowrap;
+  }
+  .month.active .label { color: var(--ink); }
+  .month .short { display: none; }
   .ruler {
     position: relative;
     height: 18px;
-    background: repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 12px);
+    background: repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 12px) 0 100% / 100% 10px no-repeat;
   }
-  .year.active .ruler {
-    background: repeating-linear-gradient(90deg, var(--tick-active) 0 1px, transparent 1px 12px);
+  .month.active .ruler {
+    background-image: repeating-linear-gradient(90deg, var(--tick-active) 0 1px, transparent 1px 12px);
   }
+  .ruler::before, .month:last-child .ruler::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: var(--tick-active);
+  }
+  .month:last-child .ruler::after { left: auto; right: 0; }
   .mark {
     position: absolute;
     top: -6px;
@@ -192,6 +198,9 @@
 
   @media (max-width: 760px) {
     .hero { padding: 56px 0 40px; }
+    .month .label { font-size: 11px; letter-spacing: .04em; }
+    .month .long { display: none; }
+    .month .short { display: inline; }
     .row {
       grid-template-columns: minmax(0, 1fr) 24px;
       grid-template-areas: "date arrow" "body body" "tags tags";
@@ -286,12 +295,20 @@
     </a></li>`;
   };
 
-  const timeline = (years, active) => `<nav class="timeline" aria-label="Years"><div class="years">${
-    years.map(y => `<div class="year${y === active ? ' active' : ''}">
-      <a href="/${y}"${y === active ? ' aria-current="page"' : ''}>${y}</a>
-      <div class="ruler" aria-hidden="true">${entries.filter(e => e.year === y).map(e =>
-        `<span class="mark" style="left:${(dayOfYear(parse(e.date)) / daysInYear(y) * 100).toFixed(2)}%" title="${esc(e.title)}"></span>`).join('')}</div>
-    </div>`).join('')}</div></nav>`;
+  const timeline = (years, year) => {
+    const yearLinks = years.length > 1 ? `<nav class="years" aria-label="Years">${years.map(y =>
+      `<a href="/${y}"${y === year ? ' aria-current="page"' : ''}>${y}</a>`).join('')}</nav>` : '';
+    const months = MONTHS.map((name, i) => {
+      const days = new Date(Date.UTC(year, i + 1, 0)).getUTCDate();
+      const builds = entries.filter(e => e.year === year && parse(e.date).m === i + 1);
+      return `<div class="month${builds.length ? ' active' : ''}">
+        <span class="label"><span class="long">${name.slice(0, 3)}</span><span class="short">${name[0]}</span></span>
+        <div class="ruler">${builds.map(e =>
+          `<span class="mark" style="left:${((parse(e.date).d - 0.5) / days * 100).toFixed(2)}%" title="${esc(e.title)}"></span>`).join('')}</div>
+      </div>`;
+    }).join('');
+    return `<div class="timeline">${yearLinks}<div class="months" aria-hidden="true">${months}</div></div>`;
+  };
 
   const renderList = (year, years) => {
     const items = entries.filter(e => e.year === year);
