@@ -3,119 +3,367 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Organizer — Changelog</title>
-<meta name="description" content="What changed in AI Organizer, build by build.">
+<title>AI Organizer — What’s new</title>
+<meta name="description" content="The latest AI Organizer releases, updates, and fixes.">
 <meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
 <style>
   :root {
-    --bg: #efede5;          /* the app's own warm paper */
-    --card: #faf9f5;
-    --rule: #e3e0d6;
-    --ink: #1c1c1e;
-    --muted: #6e6e73;
-    --accent: #0a7aff;
-    --added: #1f8f4e;
-    --improved: #0a7aff;
-    --fixed: #c2410c;
+    --bg: #ffffff;
+    --ink: #18181b;
+    --text: #3f3f46;
+    --muted: #71717a;
+    --faint: #a1a1aa;
+    --rule: #e4e4e7;
+    --tick: #e4e4e7;
+    --tick-active: #a1a1aa;
+    --hover: #f4f4f5;
+    --focus: #2563eb;
+    --tag-feature: #2563eb;
+    --tag-enhancement: #7c3aed;
+    --tag-fix: #d97706;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1b1a18;
-      --card: #2b2a27;
-      --rule: #3a3934;
-      --ink: #f2f2f2;
-      --muted: #9a9a9e;
-      --accent: #4da3ff;
-      --added: #4ade80;
-      --improved: #4da3ff;
-      --fixed: #fb923c;
+      --bg: #0c0c0d;
+      --ink: #f4f4f5;
+      --text: #c4c4c8;
+      --muted: #8e8e95;
+      --faint: #5f5f66;
+      --rule: #27272a;
+      --tick: #27272a;
+      --tick-active: #52525b;
+      --hover: #151517;
+      --focus: #60a5fa;
+      --tag-feature: #60a5fa;
+      --tag-enhancement: #a78bfa;
+      --tag-fix: #fbbf24;
     }
   }
+
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  main { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
-  header { margin-bottom: 2.5rem; }
-  h1 { font-size: 1.75rem; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .35rem; text-wrap: balance; }
-  header p { margin: 0; color: var(--muted); }
-  article {
-    background: var(--card);
-    border-radius: 20px;
-    padding: 1.25rem 1.375rem 1.375rem;
-    margin: 0 0 1rem;
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+  main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 100vh;
   }
-  .meta { display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap; margin-bottom: .5rem; }
-  .build {
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    font-size: .8125rem;
-    color: var(--accent);
-    background: color-mix(in oklab, var(--accent) 12%, transparent);
-    padding: .15rem .55rem;
-    border-radius: 999px;
+  @media (min-width: 1200px) {
+    main { padding: 0 40px; border-inline: 1px dashed var(--rule); }
+  }
+
+  /* Small-caps labels: breadcrumb, counts, dates */
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
     white-space: nowrap;
   }
-  time { color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }
-  h2 { font-size: 1.125rem; line-height: 1.3; margin: 0 0 .75rem; letter-spacing: -0.01em; text-wrap: balance; }
-  h3 {
-    font-size: .6875rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-    margin: 1rem 0 .35rem; color: var(--muted);
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px dashed var(--rule);
   }
-  h3.added { color: var(--added); } h3.improved { color: var(--improved); } h3.fixed { color: var(--fixed); }
-  ul { margin: 0; padding-left: 1.2rem; }
-  li { margin: .3rem 0; text-wrap: pretty; }
-  li + li { border-top: 0; }
-  .empty, .error { color: var(--muted); padding: 2rem 0; }
-  footer { margin-top: 3rem; color: var(--muted); font-size: .8125rem; }
-  a { color: var(--accent); text-underline-offset: 2px; }
+  .crumbs { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .crumbs a { text-decoration: none; }
+  .crumbs a:hover { color: var(--ink); }
+  .crumbs .sep { color: var(--faint); font-size: 12px; }
+  .crumbs .current { color: var(--ink); overflow: hidden; text-overflow: ellipsis; }
+
+  /* Hero */
+  .hero { text-align: center; padding: 88px 0 56px; }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0 0 14px;
+  }
+  .hero p { margin: 0; color: var(--muted); font-size: 17px; text-wrap: balance; }
+
+  /* Year timeline */
+  .timeline { border-bottom: 1px dashed var(--rule); }
+  .years { display: flex; }
+  .year { flex: 1; min-width: 0; }
+  .year a {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 4px 0 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .year a:hover, .year.active a { color: var(--ink); }
+  .ruler {
+    position: relative;
+    height: 18px;
+    background: repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 12px);
+  }
+  .year.active .ruler {
+    background: repeating-linear-gradient(90deg, var(--tick-active) 0 1px, transparent 1px 12px);
+  }
+  .mark {
+    position: absolute;
+    top: -6px;
+    bottom: 0;
+    width: 2px;
+    margin-left: -1px;
+    background: var(--ink);
+    border-radius: 1px;
+  }
+
+  /* Entry rows */
+  .list { list-style: none; margin: 0; padding: 0; }
+  .row {
+    display: grid;
+    grid-template-columns: 128px minmax(0, 1fr) 240px 24px;
+    gap: 24px;
+    align-items: start;
+    padding: 28px 0;
+    border-bottom: 1px dashed var(--rule);
+    text-decoration: none;
+    color: inherit;
+  }
+  .row .date { padding-top: 3px; }
+  .row .date small {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    letter-spacing: .02em;
+    text-transform: none;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .row h2 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.35;
+    margin: 0 0 4px;
+    text-wrap: balance;
+  }
+  .row p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; text-wrap: pretty; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px 16px; padding-top: 3px; }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dot); flex: none; }
+  .feature { --dot: var(--tag-feature); }
+  .enhancement { --dot: var(--tag-enhancement); }
+  .fix { --dot: var(--tag-fix); }
+  .row .arrow { justify-self: end; color: var(--faint); font-size: 18px; line-height: 1.35; }
+  @media (hover: hover) {
+    .row:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--faint); }
+    .row:hover .arrow { color: var(--ink); transform: translateX(3px); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .row .arrow { transition: transform 150ms cubic-bezier(.2, 0, 0, 1), color 150ms; }
+  }
+  .empty, .error { color: var(--muted); padding: 40px 0; text-align: center; }
+
+  @media (max-width: 760px) {
+    .hero { padding: 56px 0 40px; }
+    .row {
+      grid-template-columns: minmax(0, 1fr) 24px;
+      grid-template-areas: "date arrow" "body body" "tags tags";
+      gap: 10px 16px;
+      padding: 24px 0;
+    }
+    .row .date { grid-area: date; padding-top: 0; }
+    .row .date small { display: inline; margin: 0 0 0 10px; }
+    .row .body { grid-area: body; }
+    .row .tags { grid-area: tags; padding-top: 2px; }
+    .row .arrow { grid-area: arrow; }
+    .topbar .version { display: none; }
+  }
+
+  /* Entry page */
+  .detail { max-width: 720px; margin: 0 auto; padding: 48px 0 96px; }
+  .detail h1 {
+    font-size: clamp(30px, 4.5vw, 40px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .detail .meta { margin: 18px 0 0; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .detail .lede { margin: 28px 0 0; font-size: 17px; line-height: 1.6; color: var(--text); text-wrap: pretty; }
+  .section { margin-top: 40px; }
+  .section h2 {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 12px;
+  }
+  .section h2::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
+  .section ul { margin: 0; padding-left: 22px; }
+  .section li { margin: 10px 0; font-size: 16px; line-height: 1.6; color: var(--text); text-wrap: pretty; }
+  .section li::marker { color: var(--faint); }
+  .section li b { color: var(--ink); font-weight: 600; }
+  .pager {
+    display: flex; justify-content: space-between; gap: 16px;
+    margin-top: 64px; padding-top: 24px; border-top: 1px dashed var(--rule);
+  }
+  .pager a {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border: 1px solid var(--rule); border-radius: 8px;
+    color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500;
+  }
+  .pager a:hover { background: var(--hover); }
+  .pager .next { margin-left: auto; }
+
+  footer { padding: 32px 0 40px; color: var(--faint); font-size: 13px; text-align: center; }
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>AI Organizer — Changelog</h1>
-    <p>What changed, build by build. Newest first.</p>
-  </header>
-  <section id="entries" aria-live="polite"><p class="empty">Loading…</p></section>
-  <footer>Times are India Standard Time.</footer>
-</main>
+<main id="app"><p class="empty">Loading…</p></main>
 <script>
-(async () => {
-  const el = document.getElementById('entries');
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const pretty = (date, time) => {
-    const [y, m, d] = date.split('-').map(Number);
-    return `${d} ${months[m - 1]} ${y} · ${time}`;
+(() => {
+  const app = document.getElementById('app');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const MON = MONTHS.map(m => m.slice(0, 3));
+  const TAGS = { feature: 'Feature', enhancement: 'Enhancement', fix: 'Fix' };
+
+  const slugify = s => String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 64);
+  const parse = d => { const [y, m, day] = d.split('-').map(Number); return { y, m, d: day }; };
+  const dayOfYear = ({ y, m, d }) => Math.round((Date.UTC(y, m - 1, d) - Date.UTC(y, 0, 1)) / 864e5) + 1;
+  const daysInYear = y => (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0)) ? 366 : 365;
+  const stamp = e => `${esc(e.date)}T${esc(e.time)}:00+05:30`;
+  const tz = e => esc(e.timezone || 'IST');
+
+  const tagsOf = e => [
+    e.added && e.added.length && 'feature',
+    e.improved && e.improved.length && 'enhancement',
+    e.fixed && e.fixed.length && 'fix'
+  ].filter(Boolean);
+  const tagList = e => `<div class="tags">${tagsOf(e).map(t => `<span class="tag ${t}">${TAGS[t]}</span>`).join('')}</div>`;
+
+  const crumbs = (...parts) => `<nav class="crumbs" aria-label="Breadcrumb">
+    <a class="eyebrow" href="/">Changelog</a>${parts.map(p => `<span class="sep" aria-hidden="true">/</span>${
+      p.href ? `<a class="eyebrow" href="${p.href}">${esc(p.label)}</a>`
+             : `<span class="eyebrow current" aria-current="page">${esc(p.label)}</span>`}`).join('')}
+  </nav>`;
+
+  let entries = [];
+
+  const row = e => {
+    const { m, d } = parse(e.date);
+    return `<li><a class="row" href="/${e.year}/${e.slug}">
+      <div class="date eyebrow"><time datetime="${stamp(e)}">${MON[m - 1]} ${d}</time><small>${esc(e.time)} ${tz(e)}</small></div>
+      <div class="body"><h2>${esc(e.title)}</h2>${e.summary ? `<p>${esc(e.summary)}</p>` : ''}</div>
+      ${tagList(e)}
+      <span class="arrow" aria-hidden="true">→</span>
+    </a></li>`;
   };
-  const list = (label, cls, items) => (items && items.length)
-    ? `<h3 class="${cls}">${label}</h3><ul>${items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : '';
-  try {
-    const res = await fetch('changelog.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error(res.status);
-    const entries = await res.json();
-    if (!entries.length) { el.innerHTML = '<p class="empty">Nothing yet.</p>'; return; }
-    el.innerHTML = entries.map(e => `
-      <article>
-        <div class="meta">
-          <span class="build">${esc(e.version)} (${esc(e.build)})</span>
-          <time datetime="${esc(e.date)}T${esc(e.time)}:00+05:30">${pretty(e.date, e.time)} ${esc(e.timezone || 'IST')}</time>
-        </div>
-        <h2>${esc(e.title)}</h2>
-        ${list('Added', 'added', e.added)}
-        ${list('Improved', 'improved', e.improved)}
-        ${list('Fixed', 'fixed', e.fixed)}
-      </article>`).join('');
-  } catch (err) {
-    el.innerHTML = '<p class="error">Couldn’t load the changelog.</p>';
-  }
+
+  const timeline = (years, active) => `<nav class="timeline" aria-label="Years"><div class="years">${
+    years.map(y => `<div class="year${y === active ? ' active' : ''}">
+      <a href="/${y}"${y === active ? ' aria-current="page"' : ''}>${y}</a>
+      <div class="ruler" aria-hidden="true">${entries.filter(e => e.year === y).map(e =>
+        `<span class="mark" style="left:${(dayOfYear(parse(e.date)) / daysInYear(y) * 100).toFixed(2)}%" title="${esc(e.title)}"></span>`).join('')}</div>
+    </div>`).join('')}</div></nav>`;
+
+  const renderList = (year, years) => {
+    const items = entries.filter(e => e.year === year);
+    const n = items.length;
+    app.innerHTML = `
+      <header class="topbar">${crumbs({ label: String(year) })}<span class="eyebrow">${n} ${n === 1 ? 'update' : 'updates'}</span></header>
+      <section class="hero"><h1>What’s new</h1><p>The latest AI Organizer releases, updates, and fixes.</p></section>
+      ${timeline(years, year)}
+      ${n ? `<ul class="list">${items.map(row).join('')}</ul>` : `<p class="empty">No updates in ${year} yet.</p>`}
+      <footer>Times are India Standard Time.</footer>`;
+    document.title = 'AI Organizer — What’s new';
+  };
+
+  const item = s => {
+    const m = String(s).match(/^([^:]{3,48}):\s+(.+)$/s);
+    return `<li>${m ? `<b>${esc(m[1])}:</b> ${esc(m[2])}` : esc(s)}</li>`;
+  };
+  const section = (label, cls, items) => (items && items.length)
+    ? `<section class="section"><h2 class="${cls}">${label}</h2><ul>${items.map(item).join('')}</ul></section>` : '';
+
+  const renderDetail = e => {
+    const { y, m, d } = parse(e.date);
+    const i = entries.indexOf(e);
+    const newer = entries[i - 1], older = entries[i + 1];
+    const link = (x, cls, text) => x ? `<a class="${cls}" href="/${x.year}/${x.slug}">${text}</a>` : '';
+    const pager = (newer || older)
+      ? `<nav class="pager" aria-label="More updates">${link(newer, 'prev', '<span aria-hidden="true">‹</span> Previous')}${link(older, 'next', 'Next <span aria-hidden="true">›</span>')}</nav>` : '';
+    app.innerHTML = `
+      <header class="topbar">${crumbs({ label: String(y), href: '/' + y }, { label: `${MONTHS[m - 1]} ${d}` })}<span class="eyebrow version">Version ${esc(e.version)} (${esc(e.build)})</span></header>
+      <article class="detail">
+        <h1>${esc(e.title)}</h1>
+        ${tagList(e)}
+        <p class="meta"><time datetime="${stamp(e)}">${d} ${MONTHS[m - 1]} ${y}, ${esc(e.time)} ${tz(e)}</time> · Version ${esc(e.version)}, build ${esc(e.build)}</p>
+        ${e.summary ? `<p class="lede">${esc(e.summary)}</p>` : ''}
+        ${section('Added', 'feature', e.added)}
+        ${section('Improved', 'enhancement', e.improved)}
+        ${section('Fixed', 'fix', e.fixed)}
+        ${pager}
+      </article>
+      <footer>Times are India Standard Time.</footer>`;
+    document.title = `${e.title} — AI Organizer`;
+  };
+
+  const render = () => {
+    const parts = location.pathname.split('/').filter(Boolean);
+    const years = [...new Set(entries.map(e => e.year))].sort((a, b) => a - b);
+    if (parts.length >= 2) {
+      const e = entries.find(x => x.year === Number(parts[0]) && x.slug === parts[1]);
+      if (e) { renderDetail(e); return; }
+    }
+    const latest = years[years.length - 1] || new Date().getFullYear();
+    const year = years.includes(Number(parts[0])) ? Number(parts[0]) : latest;
+    renderList(year, years.length ? years : [year]);
+  };
+
+  document.addEventListener('click', ev => {
+    const a = ev.target.closest('a[href^="/"]');
+    if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) return;
+    ev.preventDefault();
+    history.pushState(null, '', a.getAttribute('href'));
+    render();
+    window.scrollTo(0, 0);
+  });
+  addEventListener('popstate', render);
+
+  fetch('/changelog.json', { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(list => {
+      entries = list.map(e => ({ ...e, slug: e.slug || slugify(e.title), year: Number(e.date.slice(0, 4)) }));
+      render();
+    })
+    .catch(() => { app.innerHTML = '<p class="error">Couldn’t load the changelog.</p>'; });
 })();
 </script>
 </body>

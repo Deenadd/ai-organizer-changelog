@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/:year(\\d{4})", "destination": "/index.html" },
+    { "source": "/:year(\\d{4})/:slug", "destination": "/index.html" }
+  ]
+}
