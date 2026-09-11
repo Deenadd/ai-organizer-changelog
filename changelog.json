@@ -1,5 +1,40 @@
 [
   {
+    "version": "1.3",
+    "build": 3,
+    "date": "2026-09-11",
+    "time": "10:00",
+    "timezone": "IST",
+    "title": "Figma comments that actually arrive, and answering them without leaving",
+    "summary": "Figma mentions reach the agenda and can be replied to in the app, with the design they point at. Three greetings a day, a list that scrolls properly, and today's agenda is today's again.",
+    "added": [
+      "Reply to a Figma comment from inside the app. The reader has a composer that posts into the same thread, and what you sent stays on screen.",
+      "The design the comment points at is shown above it, the way Figma's own comment view does — “change this text” means little without the screen it is about.",
+      "Three suggested replies under every Figma comment, written for design feedback: on it, when, or which part exactly. They appear when you tap the field.",
+      "Settings › Apps › Figma now has a Watched files list. Paste any Figma link and the app reads comments from it; a project or team link covers everything inside, including files added later.",
+      "Copied a Figma link already? The list offers it as one tap instead of asking you to paste.",
+      "Figma links written in Slack messages and email are picked up on their own and listed as found in a message.",
+      "Three greetings a day — 10:30, 13:00 and 18:00 — each with a short line written for that hour, rotating through the week.",
+      "Open work older than today folds into its own Earlier section, collapsed, beside Completed."
+    ],
+    "improved": [
+      "Tapping a Figma comment opens the reader instead of jumping straight to Figma. Open in Figma is still the first button there.",
+      "The list has the screen back. The big title scrolls away and the date strip sticks beneath it, so about a third more of the page is list.",
+      "Today's agenda is what arrived today. Everything still open from before is carried over and one tap away, just not in the way.",
+      "A task is filed by what its own summary concluded, so a row can no longer say “needs your reply” while the card inside it says the opposite.",
+      "Each watched Figma file is read at its own pace — often while a conversation is live, rarely once it has gone quiet.",
+      "A Figma file's name is shown on the row, so a mention says where it happened.",
+      "When Figma refuses a token it now says what is actually missing, rather than just “refused”."
+    ],
+    "fixed": [
+      "Figma comments could never start arriving. The app only read files it had learned about from Figma's notification email, and the whole point of reading comments is that the email does not always come.",
+      "The app crashed on opening for anyone with Figma connected.",
+      "The list would refuse to scroll depending on which row you started the drag on.",
+      "A pasted team link larger than twenty files never read past the first twenty.",
+      "Replies could be sent to the wrong place in a comment thread."
+    ]
+  },
+  {
     "version": "1.2",
     "build": 3,
     "date": "2026-09-09",
