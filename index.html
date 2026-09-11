@@ -108,7 +108,7 @@
   }
   .hero p { margin: 0; color: var(--muted); font-size: 17px; text-wrap: balance; }
 
-  /* Month timeline */
+  /* One month, day by day */
   .timeline { border-bottom: 1px dashed var(--rule); }
   .years { display: flex; gap: 20px; padding: 0 0 20px; }
   .years a {
@@ -116,36 +116,37 @@
     color: var(--muted); text-decoration: none; font-variant-numeric: tabular-nums;
   }
   .years a:hover, .years a[aria-current] { color: var(--ink); }
-  .months { display: flex; }
-  .month { flex: 1; min-width: 0; }
-  .month .label {
-    display: block;
+
+  .monthline {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap; padding-bottom: 14px;
+  }
+  .monthname { color: var(--ink); }
+  .months { display: flex; gap: 18px; flex-wrap: wrap; }
+  .months button {
+    appearance: none; background: none; border: 0; padding: 0; cursor: pointer; font: inherit;
     font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--muted); padding: 4px 0 12px; white-space: nowrap;
+    color: var(--muted);
   }
-  .month.active .label { color: var(--ink); }
-  .month .short { display: none; }
-  .ruler {
-    position: relative;
-    height: 18px;
-    background: repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 12px) 0 100% / 100% 10px no-repeat;
+  .months button[aria-current] { color: var(--ink); }
+  .months button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+
+  /* Numbers on one baseline and ticks on another, whatever height a tick takes — so a day with
+     an update grows its tick upward instead of shoving its own number out of the row. */
+  .days { display: flex; height: 40px; margin-bottom: 20px; }
+  .day { position: relative; flex: 1; min-width: 0; }
+  .day .num {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    font-size: 11px; font-weight: 500; letter-spacing: .04em; color: var(--muted);
+    font-variant-numeric: tabular-nums; line-height: 1;
   }
-  .month.active .ruler {
-    background-image: repeating-linear-gradient(90deg, var(--tick-active) 0 1px, transparent 1px 12px);
+  .day .tick {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 6px; background: var(--tick);
   }
-  .ruler::before, .month:last-child .ruler::after {
-    content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: var(--tick-active);
-  }
-  .month:last-child .ruler::after { left: auto; right: 0; }
-  .mark {
-    position: absolute;
-    top: -6px;
-    bottom: 0;
-    width: 2px;
-    margin-left: -1px;
-    background: var(--ink);
-    border-radius: 1px;
-  }
+  .day.major .tick { height: 10px; background: var(--tick-active); }
+  .day.marked .num { color: var(--ink); }
+  .day.marked .tick { width: 2px; height: 22px; background: var(--ink); border-radius: 1px; }
 
   /* Entry rows */
   .list { list-style: none; margin: 0; padding: 0; }
@@ -203,9 +204,11 @@
 
   @media (max-width: 760px) {
     .hero { padding: 56px 0 40px; }
-    .month .label { font-size: 11px; letter-spacing: .04em; }
-    .month .long { display: none; }
-    .month .short { display: inline; }
+    /* 31 day numbers don't fit a phone: `.sm` marks the ones that still have room. */
+    .day .num { display: none; }
+    .day .num.sm { display: block; }
+    .months { gap: 14px; }
+    .months button { font-size: 11px; letter-spacing: .04em; }
     .row {
       grid-template-columns: minmax(0, 1fr) 24px;
       grid-template-areas: "date arrow" "body body" "tags tags";
@@ -300,19 +303,51 @@
     </a></li>`;
   };
 
+  // The month the ruler is showing. Null until you pick one, so it follows the newest update.
+  let shownMonth = null;
+
   const timeline = (years, year) => {
     const yearLinks = years.length > 1 ? `<nav class="years" aria-label="Years">${years.map(y =>
       `<a href="/${y}"${y === year ? ' aria-current="page"' : ''}>${y}</a>`).join('')}</nav>` : '';
-    const months = MONTHS.map((name, i) => {
-      const days = new Date(Date.UTC(year, i + 1, 0)).getUTCDate();
-      const builds = entries.filter(e => e.year === year && parse(e.date).m === i + 1);
-      return `<div class="month${builds.length ? ' active' : ''}">
-        <span class="label"><span class="long">${name.slice(0, 3)}</span><span class="short">${name[0]}</span></span>
-        <div class="ruler">${builds.map(e =>
-          `<span class="mark" style="left:${((parse(e.date).d - 0.5) / days * 100).toFixed(2)}%" title="${esc(e.title)}"></span>`).join('')}</div>
-      </div>`;
+
+    const inYear = entries.filter(e => e.year === year);
+    if (!inYear.length) return `<div class="timeline">${yearLinks}</div>`;
+
+    // Only the months that shipped something. An empty ruler for a month with no updates is a
+    // row of ticks that says nothing.
+    const present = [...new Set(inYear.map(e => parse(e.date).m))].sort((a, b) => a - b);
+    const month = present.includes(shownMonth) ? shownMonth : present[present.length - 1];
+    const days = new Date(Date.UTC(year, month, 0)).getUTCDate();
+
+    const titles = new Map();
+    for (const e of inYear.filter(e => parse(e.date).m === month)) {
+      const d = parse(e.date).d;
+      titles.set(d, titles.has(d) ? `${titles.get(d)} · ${e.title}` : e.title);
+    }
+
+    const months = present.length > 1 ? `<nav class="months" aria-label="Months">${present.map(m =>
+      `<button type="button" data-month="${m}"${m === month ? ' aria-current="true"' : ''}>${MON[m - 1]}</button>`
+    ).join('')}</nav>` : '';
+
+    // A day with an update always gets its number; a milestone gives way to one that is too
+    // close to it, because two numbers in adjacent cells overlap rather than crowd. A phone's
+    // cells are a third as wide, so it needs more clearance and keeps fewer milestones.
+    const near = (d, gap) => [...titles.keys()].some(m => Math.abs(m - d) <= gap);
+    const cells = Array.from({ length: days }, (_, i) => {
+      const d = i + 1;
+      const hit = titles.get(d);
+      const major = d === 1 || d % 5 === 0;
+      const wide = hit || (major && !near(d, 1));
+      const narrow = hit || ((d === 1 || d % 10 === 0) && !near(d, 2));
+      const cls = ['day', hit && 'marked', major && 'major'].filter(Boolean).join(' ');
+      return `<div class="${cls}">${wide ? `<span class="num${narrow ? ' sm' : ''}">${d}</span>` : ''}<span class="tick"${
+        hit ? ` title="${esc(hit)}"` : ''}></span></div>`;
     }).join('');
-    return `<div class="timeline">${yearLinks}<div class="months" aria-hidden="true">${months}</div></div>`;
+
+    return `<div class="timeline">${yearLinks}
+      <div class="monthline"><span class="eyebrow monthname">${MONTHS[month - 1]} ${year}</span>${months}</div>
+      <div class="days">${cells}</div>
+    </div>`;
   };
 
   const renderList = (year, years) => {
@@ -370,6 +405,9 @@
   };
 
   document.addEventListener('click', ev => {
+    const pick = ev.target.closest('.months button[data-month]');
+    if (pick) { shownMonth = Number(pick.dataset.month); render(); return; }
+
     const a = ev.target.closest('a[href^="/"]');
     if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) return;
     ev.preventDefault();
