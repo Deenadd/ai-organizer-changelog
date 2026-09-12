@@ -1,34 +1,52 @@
 [
   {
     "version": "1.3",
+    "build": 4,
+    "date": "2026-09-11",
+    "time": "20:30",
+    "timezone": "IST",
+    "title": "A day of comments as one row, and a bell for the file that won’t stop",
+    "summary": "Three or more comments on a file in one day now arrive as a single row that opens into the day itself. Choose whether only mentions become tasks, and silence one noisy file without losing the project it lives in.",
+    "added": [
+      "Choose whether only comments that name you become tasks, or every comment does. The switch is in Settings › Apps › Figma.",
+      "Mute a single file inside a watched project or team. Expanding one lists the files under it with what each has said lately, and a bell silences the noisy one.",
+      "A busy day arrives as one row. One or two comments still appear as ordinary rows; three or more collapse into “Agenda v4 — 10 comments, 3 mention you”.",
+      "Open that row and you get the day itself — the comments naming you first, the rest under them. Tap one to open it on its own, with its thread and a place to reply.",
+      "A Figma row closes itself once every comment that named you that day is resolved in Figma. It is logged as closed by the app, so it never reads as something you finished.",
+      "After you send a reply, the composer offers “Mark done” for one tap. Replying is not finishing, so it is offered and never assumed."
+    ],
+    "improved": [
+      "The design sits in a panel of its own height with Figma’s pin on it, so a comment on a long screenshot no longer pushes the conversation off the screen, and you can see which part it is about. Tap it for full size.",
+      "The design is kept after the first look and fetched ahead of you during a sync, so it is usually on screen the moment you open a comment rather than a few seconds later.",
+      "Your day is your day. A task stays on the day it arrived until you tick it, and each day on the strip carries its own count.",
+      "The menu, ⋯ and Back buttons are smaller, and the same size as each other."
+    ],
+    "fixed": [
+      "Scrolling, properly this time — a row’s own swipe now steps aside for a vertical drag, so the list moves wherever on it you start.",
+      "The same Figma comments could show twice — once as separate rows and once as the day’s collection."
+    ],
+    "slug": "a-day-of-comments-as-one-row"
+  },
+  {
+    "version": "1.3",
     "build": 3,
     "date": "2026-09-11",
     "time": "10:00",
     "timezone": "IST",
     "title": "Figma comments that actually arrive, and answering them without leaving",
-    "summary": "Figma mentions reach the agenda and can be replied to in the app, with the design they point at. Choose mentions only or every comment, mute a single file, and let a day's comments arrive as one row instead of ten.",
+    "summary": "Figma mentions reach the agenda as tasks you can answer without leaving the app — the reply posts into the same thread, and the design the comment points at sits above it.",
     "added": [
       "Reply to a Figma comment from inside the app. The reader has a composer that posts into the same thread, and what you sent stays on screen.",
-      "The design the comment points at is shown above it, the way Figma’s own comment view does — “change this text” means little without the screen it is about. Tap it to open it full size.",
+      "The design the comment points at is shown above it, the way Figma’s own comment view does — “change this text” means little without the screen it is about.",
       "Three suggested replies under every Figma comment, written for design feedback: on it, when, or which part exactly. They appear when you tap the field.",
-      "Choose whether only comments that name you become tasks, or every comment does. The switch is in Settings › Apps › Figma.",
-      "Mute a single file inside a watched project or team. Expanding one lists the files under it with what each has said lately, and a bell silences the noisy one.",
-      "A busy day arrives as one row. One or two comments still appear as ordinary rows; three or more collapse into “Agenda v4 — 10 comments, 3 mention you”.",
-      "Open that row and you get the day itself — the comments naming you first, the rest under them. Tap one to open it on its own, with its thread and a place to reply.",
       "Settings › Apps › Figma now has a Watched files list. Paste any Figma link and the app reads comments from it; a project or team link covers everything inside, including files added later.",
       "Copied a Figma link already? The list offers it as one tap instead of asking you to paste.",
       "Figma links written in Slack messages and email are picked up on their own and listed as found in a message.",
-      "A Figma row closes itself once every comment that named you that day is resolved in Figma. It is logged as closed by the app, so it never reads as something you finished.",
-      "After you send a reply, the composer offers “Mark done” for one tap. Replying is not finishing, so it is offered and never assumed.",
       "Three greetings a day — 10:30, 13:00 and 18:00 — each with a short line written for that hour, rotating through the week."
     ],
     "improved": [
       "Tapping a Figma comment opens the reader instead of jumping straight to Figma. Open in Figma is still the first button there.",
-      "The design sits in a panel of its own height with Figma’s pin on it, so a comment on a long screenshot no longer pushes the conversation off the screen, and you can see which part it is about.",
-      "The design is kept after the first look and fetched ahead of you during a sync, so it is usually on screen the moment you open a comment rather than a few seconds later.",
-      "Your day is your day. A task stays on the day it arrived until you tick it, and each day on the strip carries its own count.",
       "The header stays put — title, greeting and the date strip — and only the list moves under it.",
-      "The menu, ⋯ and Back buttons are smaller, and the same size as each other.",
       "A task is filed by what its own summary concluded, so a row can no longer say “needs your reply” while the card inside it says the opposite.",
       "Each watched Figma file is read at its own pace — often while a conversation is live, rarely once it has gone quiet.",
       "A Figma file’s name is shown on the row, so a mention says where it happened.",
@@ -37,8 +55,7 @@
     "fixed": [
       "Figma comments could never start arriving. The app only read files it had learned about from Figma’s notification email, and the whole point of reading comments is that the email does not always come.",
       "The app crashed on opening for anyone with Figma connected.",
-      "The list refused to scroll unless you happened to start the drag on a task’s checkbox.",
-      "The same Figma comments could show twice — once as separate rows and once as the day’s collection.",
+      "The list would refuse to scroll depending on which row you started the drag on.",
       "A pasted team link larger than twenty files never read past the first twenty.",
       "Replies could be sent to the wrong place in a comment thread."
     ]
