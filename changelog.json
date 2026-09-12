@@ -8,29 +8,29 @@
     "slug": "a-new-home-screen",
     "title": "A new home screen, and a recap of your day at six",
     "summary": "The agenda is redrawn end to end — a bottom bar you page days from, a header that tells you the hour by its colour, and a Settings sheet. Notifications drop to two a day, and the evening one now writes up what you finished.",
+    "design": [
+      "The home screen is redrawn. A bottom bar carries everything — one box on the left, the day in the middle, Settings on the right — and the ☰ menu, the ⋯ arrange menu and the week strip are gone. Nothing sits above the title now but the date.",
+      "The colour across the top follows the hour: warm before noon, gold through the afternoon, blue after six. Opening the app places you in the day before you’ve read a word, and it swells and settles once as it arrives.",
+      "“Today’s Agenda” is set in the Timeless serif, and it names the day it’s showing — “Friday’s Agenda” when you page back. The line above carries the year.",
+      "The list arrives one row at a time, resolving out of a blur.",
+      "Rows are quieter: no app icons down the left (six of them read as a column of logos, and the name beside each already says Slack), and the checkbox sits close to the title instead of reserving the width of a thumb.",
+      "Settings is a sheet — one page, icons down the left, the app’s name at the foot.",
+      "Suggested replies are cards, and the reply box matches the rest of the screen.",
+      "Opening a message no longer steps down a shade: the thread is on the same page colour as the agenda.",
+      "Dark mode follows its own design rather than being the light one dimmed — a near-black page, a gradient of its own for each part of the day, and text a notch under white so it doesn’t glare."
+    ],
     "added": [
       "Two notifications a day instead of three: 11:00 names what needs you, 18:00 hands back what you got done. The 13:00 one is gone — it had nothing of its own to say, and it was training you to swipe all of them away.",
       "The morning one names the top couple of tasks rather than counting them. “Priya needs the agenda frames, and legal is waiting on the contract. 5 things need you today.” A number can be ignored from the lock screen; a name is a decision.",
       "An end-of-day recap. What you finished, written up as something you can paste into a standup — with the days before it underneath, for the weekly version. It’s the one thing the app writes instead of triages.",
       "Tapping the 18:00 notification opens that day’s recap; “Recap” beside the Completed fold opens it any time.",
-      "A bottom bar: one box on the left, the day in the middle, Settings on the right. The old ☰ menu and ⋯ arrange menu are gone — nothing sits above the title now but the date.",
-      "Change the day from the bar: tap the chevrons, or swipe sideways on the date itself.",
-      "The colour across the top of the screen follows the hour — warm before noon, gold through the afternoon, blue after six — so opening the app places you in the day before you’ve read a word. It swells and settles once when you come back to it.",
-      "Settings is a sheet now, with everything on one page and an “Arrange by” row that used to be hidden behind the ⋯.",
+      "Change the day from the bottom bar: tap the chevrons, or swipe sideways on the date itself.",
       "One box, the chat, has its screen — it says what it will be and that it isn’t here yet. The button is real; the chat is next.",
       "Hold a suggested reply to read the whole thing. The card opens and everything else steps back; let go and it closes, with nothing inserted. Tapping still drops it into the composer, so reading and choosing are different gestures."
     ],
     "improved": [
-      "The title says which day you’re looking at — “Today’s Agenda” only on today, “Friday’s Agenda” otherwise — and the line above it carries the year, which is the one thing the rest of the screen can’t tell you.",
-      "“Today’s Agenda” is set in the Timeless serif.",
       "A row reads “Slack · 10:30am” instead of “Slack · 2h ago”. When something arrived is a fact about your day; how long ago is arithmetic you have to do.",
-      "The list arrives one row at a time, resolving out of a blur, rather than appearing all at once.",
-      "App icons are off the rows. Six of them down the left of a calm list read as a column of logos, and the name beside each one already says Slack.",
-      "The checkbox sits closer to the title — it had been reserving the width of a thumb target and leaving a hole that looked like an indent.",
-      "Suggested replies are cards now, and the reply box matches the rest of the screen.",
-      "Settings values step in place when you tap them. They used to open a menu that covered the rows behind it, so changing the theme blanked the labels while you were choosing.",
-      "Opening a message no longer steps down a shade — the thread is on the same page colour as the agenda.",
-      "Dark mode follows its own design rather than being the light one dimmed: a near-black page, its own gradient for each part of the day, and text a notch under white so it doesn’t glare."
+      "Settings values step in place when you tap them. They used to open a menu that covered the rows behind it, so changing the theme blanked the labels while you were choosing."
     ],
     "fixed": [
       "The app opens in light until dark is finished. The home screen follows the dark design but the pushed pages don’t yet, so a dark session walked out of one design into another. Choosing Dark still gives you dark — that’s asking to see it.",

@@ -29,6 +29,7 @@
     --tag-feature: #2563eb;
     --tag-enhancement: #7c3aed;
     --tag-fix: #d97706;
+    --tag-design: #0d9488;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -45,6 +46,7 @@
       --tag-feature: #60a5fa;
       --tag-enhancement: #a78bfa;
       --tag-fix: #fbbf24;
+      --tag-design: #2dd4bf;
     }
   }
 
@@ -192,6 +194,7 @@
   .feature { --dot: var(--tag-feature); }
   .enhancement { --dot: var(--tag-enhancement); }
   .fix { --dot: var(--tag-fix); }
+  .design { --dot: var(--tag-design); }
   .row .arrow { justify-self: end; color: var(--faint); font-size: 18px; line-height: 1.35; }
   @media (hover: hover) {
     .row:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--faint); }
@@ -269,7 +272,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const MON = MONTHS.map(m => m.slice(0, 3));
-  const TAGS = { feature: 'Feature', enhancement: 'Enhancement', fix: 'Fix' };
+  const TAGS = { design: 'Design', feature: 'Feature', enhancement: 'Enhancement', fix: 'Fix' };
 
   const slugify = s => String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 64);
   const parse = d => { const [y, m, day] = d.split('-').map(Number); return { y, m, d: day }; };
@@ -279,6 +282,7 @@
   const tz = e => esc(e.timezone || 'IST');
 
   const tagsOf = e => [
+    e.design && e.design.length && 'design',
     e.added && e.added.length && 'feature',
     e.improved && e.improved.length && 'enhancement',
     e.fixed && e.fixed.length && 'fix'
@@ -383,6 +387,7 @@
         ${tagList(e)}
         <p class="meta"><time datetime="${stamp(e)}">${d} ${MONTHS[m - 1]} ${y}, ${esc(e.time)} ${tz(e)}</time> · Version ${esc(e.version)}, build ${esc(e.build)}</p>
         ${e.summary ? `<p class="lede">${esc(e.summary)}</p>` : ''}
+        ${section('Design', 'design', e.design)}
         ${section('Added', 'feature', e.added)}
         ${section('Improved', 'enhancement', e.improved)}
         ${section('Fixed', 'fix', e.fixed)}
