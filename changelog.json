@@ -1,5 +1,45 @@
 [
   {
+    "version": "1.5",
+    "build": 1,
+    "date": "2026-09-17",
+    "time": "12:13",
+    "timezone": "IST",
+    "slug": "plan-your-day-and-summaries-that-stay-on-your-phone",
+    "title": "Plan a task into your day, and summaries that stay on your phone",
+    "summary": "Drag a task onto the day control and it becomes a block of time between your meetings. Conversation summaries and drafted replies can now run on your iPhone itself — no key, no network — and the card tells you which model wrote it. The recap becomes the week’s, on Friday.",
+    "design": [
+      "The day control is the Camera app’s dial. The days run under a glass capsule, today carries the system blue, and each one ticks as it lands. Two characters of yesterday and tomorrow show at the edges, so you can see where you are going without reading three dates at once.",
+      "Touch the dial and it takes the whole bar: the side buttons step aside, the days run the full width, and everything returns when you lift your finger.",
+      "A day now reads “17 thu”. The month was three characters that never changed across the week on screen — the date is the part that tells two days apart, so it leads and the month goes. The header above still carries the full date and year.",
+      "The floating chrome is Liquid Glass: the bottom bar’s buttons, the dial and the sheets use the system material, with a matching fallback on iPhones that don’t have it.",
+      "Text is the system font at the size your phone asks for, so every screen follows your Text Size setting instead of ignoring it.",
+      "Five taps on the “daylight.” wordmark in Settings open a mesh-gradient playground — every colour, point and knob of the header’s wash, live. It is a study for now: the header keeps the gradients it has."
+    ],
+    "added": [
+      "Plan a task into your day. Drag a row onto the day control and it becomes a block of time — sized to what the task looks like, dropped into a gap between the meetings you already have. The row’s menu does the same thing exactly: “Plan at 10:30”, “Pick a time…” and “Take off the plan”.",
+      "A planned row carries its time at the front of its line, blocks clear when you complete the task, and anything you didn’t get to rolls into the next working day — the block moves, the task stays on the day it arrived.",
+      "Swipe a row the way you swipe mail: right completes it, left opens the plan sheet, which now has “Move to tomorrow” for the days when the answer is simply not today.",
+      "Settings › Intelligence. Summaries and drafted replies can run on Apple’s on-device model instead of Gemini — no API key, nothing sent anywhere, and it works on a plane. Auto uses it when your iPhone has it and Gemini when it doesn’t; the longer jobs (the weekly recap, meeting prep, triage) stay with Gemini, where the extra room actually matters.",
+      "Every summary now says who wrote it, in a line under the paragraph: “Summarised on device” or “Summarised by Gemini”.",
+      "Settings › Weekends. Off by default — no notifications, no plannable hours, and Friday’s leftovers roll to Monday. Turn it on and Saturday and Sunday become working days everywhere at once. The weekly recap stays on Friday either way.",
+      "Write a channel as #name in an app’s custom instructions — “ignore #random”, “anything in #design is high priority” — and it applies to that Slack channel and nothing else. A DM that happens to mention the word is left alone."
+    ],
+    "improved": [
+      "The recap is the week’s now, on Friday at 17:30, rather than one every evening. A single day’s work is rarely worth a paragraph; the thing you actually have to write up is the week.",
+      "Reply tone › Mine switches instantly. On an iPhone with the on-device model, the three replies are rewritten in your voice on the spot rather than waiting for the next time the conversation changes.",
+      "The app remembers how you write between launches, so Mine works on the first thread you open instead of the third.",
+      "Changing the theme now reaches the sheet that is already open, instead of leaving it in the old palette over a recoloured page.",
+      "The day, and every value in Settings, swaps in place when it changes rather than blanking the row.",
+      "The whole app runs on iOS 18 as well as iOS 26 — the glass falls back to the system materials, and nothing else changes."
+    ],
+    "fixed": [
+      "Reply tone › Mine could do nothing at all. The voice examples were only ever read from conversations opened in that session, so on a fresh launch there were none and the replies came back in the neutral voice — you had to open a thread you had written in first, which nobody would guess.",
+      "The Settings sheet was one row too short, so the newest row sat below the fold of a card nobody expects to scroll. Its height now follows its rows.",
+      "Nothing is pushed at the weekend, including the “new tasks” ping from a sync that lands while you’re out."
+    ]
+  },
+  {
     "version": "1.4",
     "build": 1,
     "date": "2026-09-12",
