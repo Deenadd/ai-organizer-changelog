@@ -5,9 +5,9 @@
     "date": "2026-09-17",
     "time": "12:13",
     "timezone": "IST",
-    "slug": "plan-your-day-and-summaries-that-stay-on-your-phone",
-    "title": "Plan a task into your day, and summaries that stay on your phone",
-    "summary": "Drag a task onto the day control and it becomes a block of time between your meetings. Conversation summaries and drafted replies can now run on your iPhone itself — no key, no network — and the card tells you which model wrote it. The recap becomes the week’s, on Friday.",
+    "slug": "summaries-that-never-leave-your-iphone",
+    "title": "Summaries that never leave your iPhone, and a task you can plan into the day",
+    "summary": "Apple Intelligence now writes your conversation summaries and drafted replies on the iPhone itself — no API key, nothing sent anywhere, and it works with no signal. The card tells you which model wrote each one. Elsewhere: drag a task onto the day control and it becomes a block of time between your meetings, and the recap becomes the week’s, on Friday.",
     "design": [
       "The day control is the Camera app’s dial. The days run under a glass capsule, today carries the system blue, and each one ticks as it lands. Two characters of yesterday and tomorrow show at the edges, so you can see where you are going without reading three dates at once.",
       "Touch the dial and it takes the whole bar: the side buttons step aside, the days run the full width, and everything returns when you lift your finger.",
@@ -17,11 +17,12 @@
       "Five taps on the “daylight.” wordmark in Settings open a mesh-gradient playground — every colour, point and knob of the header’s wash, live. It is a study for now: the header keeps the gradients it has."
     ],
     "added": [
+      "On-device AI, on by default where your iPhone has it (Settings › Intelligence). The summary at the top of a conversation and its three drafted replies are written by Apple Intelligence on the phone — no API key to paste, no round trip, nothing about the conversation sent to a server, and it still works on a plane. Auto uses it when your iPhone can and Gemini when it can’t, so nobody loses a feature either way.",
+      "Every summary says who wrote it, in a line underneath: “Summarised on device” or “Summarised by Gemini”. It names what actually wrote that paragraph — if the phone hands a summary to Gemini, the card says Gemini.",
+      "The longer jobs stay with Gemini on purpose — the weekly recap, meeting prep and inbox triage read far more at once than a phone-sized model can hold, and that is where the extra room shows.",
       "Plan a task into your day. Drag a row onto the day control and it becomes a block of time — sized to what the task looks like, dropped into a gap between the meetings you already have. The row’s menu does the same thing exactly: “Plan at 10:30”, “Pick a time…” and “Take off the plan”.",
       "A planned row carries its time at the front of its line, blocks clear when you complete the task, and anything you didn’t get to rolls into the next working day — the block moves, the task stays on the day it arrived.",
       "Swipe a row the way you swipe mail: right completes it, left opens the plan sheet, which now has “Move to tomorrow” for the days when the answer is simply not today.",
-      "Settings › Intelligence. Summaries and drafted replies can run on Apple’s on-device model instead of Gemini — no API key, nothing sent anywhere, and it works on a plane. Auto uses it when your iPhone has it and Gemini when it doesn’t; the longer jobs (the weekly recap, meeting prep, triage) stay with Gemini, where the extra room actually matters.",
-      "Every summary now says who wrote it, in a line under the paragraph: “Summarised on device” or “Summarised by Gemini”.",
       "Settings › Weekends. Off by default — no notifications, no plannable hours, and Friday’s leftovers roll to Monday. Turn it on and Saturday and Sunday become working days everywhere at once. The weekly recap stays on Friday either way.",
       "Write a channel as #name in an app’s custom instructions — “ignore #random”, “anything in #design is high priority” — and it applies to that Slack channel and nothing else. A DM that happens to mention the word is left alone."
     ],
