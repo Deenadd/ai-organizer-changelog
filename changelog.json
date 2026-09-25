@@ -1,5 +1,39 @@
 [
   {
+    "version": "1.6",
+    "build": 1,
+    "date": "2026-09-25",
+    "time": "16:13",
+    "timezone": "IST",
+    "slug": "talking-points-and-a-chat-about-your-work",
+    "title": "A chat about your own work, and talking points for every meeting",
+    "summary": "The onebox is now a chat grounded in your agenda: ask what’s open, who you’re waiting on, or what happened with a project, and every answer shows the tasks it came from. From any meeting, it can draft the talking points for the call — it reads the week’s messages, asks you two or three questions, and writes a page you can glance at or share as a PDF.",
+    "added": [
+      "Talking points on every meeting. A card under “Before this meeting” drafts them: the chat rises from the bottom, says what this week’s messages establish, asks what you need from the call, and writes a page — sections in the order the call runs, Done / Recommend / Ask tags, blanks to fill in live. Share it as a PDF.",
+      "Quotes in the talking points are the messages themselves. Every quote is checked against what was actually said; a paraphrase is dropped rather than shown in quotation marks.",
+      "The onebox is a chat about your own agenda. “What’s still open today?”, “Who am I waiting on?”, “What did I finish this week?” — answered from the tasks on your phone, with the tasks it means shown as tappable chips inside the sentence.",
+      "Ask about a subject — “what’s the update on Ditto”, “last month” — and it searches your tasks, summaries, notes and recaps across Slack, Gmail, Calendar and Figma, showing what it looked at above the answer.",
+      "Arrange by → Projects now actually groups your work. Projects are found from Slack channels, recurring meetings and Figma files, pick up any message that mentions them by name, and can be renamed with a long-press.",
+      "A playground collection (five taps on the wordmark), with the assistant glow — a Metal shader — as its second project."
+    ],
+    "improved": [
+      "On-device summaries read closer to Gemini’s: a larger slice of the conversation, a separate call for replies, and a quality check that falls back to Gemini when the phone’s answer is too thin.",
+      "Turning weekends off also takes Saturday and Sunday out of the day control.",
+      "Faster scrolling in lists and chats: date labels are no longer rebuilt on every redraw.",
+      "Large text: card titles stack instead of squeezing to one word a line, the summary card fits above the keyboard at the biggest sizes, and more of the app follows your text size.",
+      "Reduce Motion: slides and scale-ins become a simple fade."
+    ],
+    "fixed": [
+      "Talking points could fail on every try while the questions worked. The document is written now, and a failed attempt says why (rate limit, key, offline) instead of stacking the same line again.",
+      "The done-circle in the iPad layout had no VoiceOver label and a tiny tap area; several small buttons now have full-size tap targets."
+    ],
+    "design": [
+      "One message input across the app, drawn like Messages on iOS 26: a floating glass field the height of the day control, the send arrow inside it, no grey band behind.",
+      "The home screen’s blur now sits behind the input and at the top of every page in place of the default header, so content fades out under the title and the field instead of meeting a hard edge.",
+      "The chat opens where it left off — on the questions waiting for you, or on the document it wrote."
+    ]
+  },
+  {
     "version": "1.5",
     "build": 1,
     "date": "2026-09-17",
