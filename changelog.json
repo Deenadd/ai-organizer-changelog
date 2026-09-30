@@ -1,5 +1,32 @@
 [
   {
+    "version": "1.7",
+    "build": 1,
+    "date": "2026-09-30",
+    "time": "12:20",
+    "timezone": "IST",
+    "slug": "follow-up-radar-and-the-friday-brief",
+    "title": "Follow-up radar, and the Friday Brief",
+    "summary": "Today’s page now opens with the people who haven’t replied — how long each wait has been, longest first. The week ends with the Friday Brief: a recap row on the home list and a weekly report page drawn like Screen Time’s. Underneath, the only notifications left are the two scheduled ones, and Slack tasks that a cut-short sync used to drop for good come through.",
+    "added": [
+      "Follow-up radar. Above today’s sections, a card lists the three longest waits — source, title and “3 days, no reply” — with a count of the rest. Two working days without an answer puts a conversation on it (weekends don’t count when they’re off); a reply takes it off by itself. Tap a row to open the conversation.",
+      "The Friday Brief. Once the week has something done, today’s page ends with a brief row — “6 done · Friday was busiest” and a small tilted thumbnail of the page. It reads “This week so far” until Friday.",
+      "The weekly report, in the style of Screen Time’s. A large title, the week’s count with “↑ 3 from last week”, a Mon–Fri bar chart with the daily average as a dashed rule, Busiest / Daily Average / Still Open under it, then the summary, highlights, where the work came from, what carries into next week, and everything done day by day. Share from the toolbar."
+    ],
+    "improved": [
+      "Only two notifications now: the 11:00 morning brief on workdays and the Friday 17:30 recap. A sync no longer sends a banner for every new Slack task — they arrive quietly in the agenda.",
+      "AI calls have their own network path. A long generation gets 90 seconds and is never retried and paid for twice; a rate limit waits as long as Gemini asks. A sync started offline ends within 90 seconds instead of spinning.",
+      "A timed-out talking-points draft says so, instead of a generic failure line."
+    ],
+    "fixed": [
+      "Slack tasks could be lost for good. When a background sync was cut off between reading a conversation and saving its tasks, the conversation was marked as handled and skipped on every later sync. Tasks are saved first now, and the first launch of this build re-reads every conversation that was stuck, so the missing ones come back without duplicates.",
+      "Talking points stalled forever if you left the app mid-draft: the chat showed your answers and nothing after them, with no Try again. Coming back now picks the draft up where it stopped, and switching away for a moment no longer kills the call."
+    ],
+    "design": [
+      "Chats close with the app’s round back chevron, not a Done button — the same glyph every pushed page uses. The Plan-it sheet keeps Done, because it saves the picked time."
+    ]
+  },
+  {
     "version": "1.6",
     "build": 1,
     "date": "2026-09-25",
